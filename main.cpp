@@ -127,12 +127,8 @@ int main(int argc,char *argv[])
 
 	//создаем объект ServerInstance
 	ServerInstance srv;
-
-	//устанавливаем функцию-обработчик для сигнала needAuthentication в случае подключения по сети
-	QObject::connect(srv.connection(),&ServerConnection::needAuthentication,[&user,&pass,&srv]()
-	{
-		srv.connection()->authenticateNet(user,pass);
-	});
+	//устанавливаем данные для авторизации
+	srv.connection()->prepareAuth(user,pass);
 
 	//подключаемся к серверу
 	if(!netMode)
@@ -140,7 +136,7 @@ int main(int argc,char *argv[])
 	else srv.connection()->startConnectNet(host,port);
 	if(!srv.connection()->waitForConnected())
 		return __LINE__;
-	if(!netMode&&!user.isEmpty()&&!srv.connection()->authenticateLocalFromRoot(user))
+	if(!srv.connection()->isReady())
 		return __LINE__;
 
 	//регистрируем виртуальное устройство
