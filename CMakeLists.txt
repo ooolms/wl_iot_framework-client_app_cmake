@@ -17,7 +17,7 @@ target_compile_options(TestApplication PUBLIC "-fPIC")
 
 #project options for wl_iot_framework
 target_include_directories(TestApplication PUBLIC
-	"../wl_iot_framework/wliotproxy-src/libwliotproxy-base/include"
-	"../wl_iot_framework/wliotproxy-src/libVDIL/include"
-	"../wl_iot_framework/wliotproxy-src/libwliotproxy/include")
+	"../wl_iot_framework/wliotproxy-src-base/libwliotproxy-base/include"
+	"../wl_iot_framework/wliotproxy-src-base/libVDIL/include"
+	"../wl_iot_framework/wliotproxy-src-client/libwliotproxy/include")
 target_link_libraries(TestApplication "-lwliotproxy")
